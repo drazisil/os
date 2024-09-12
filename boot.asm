@@ -1,13 +1,15 @@
-ResetSeg:
-    org 0
-    jmp Begin
+[bits 16]
+section .ResetSeg
+[org 0x7C00]
+;[org 0]
+jmp Begin
 
 Begin:
-    mov ax, 0x07C0
-    mov ds, ax
-    mov es, ax
-    mov ss, ax
-    mov sp, 0x7C00
+    ; mov ax, 0x07C0
+    ; mov ds, ax
+    ; mov es, ax
+    ; mov ss, ax
+    ; mov sp, 0x7C00
 
     mov si, msg
     call PrintString
