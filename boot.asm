@@ -9,6 +9,11 @@
 jmp 0000:Begin                  ; Far jump to the start of the bootloader
 
 Begin:
+    mov ax, 0x07C0              ; Set up the data segment register
+    add ax, 288                 ; Add 288 to the data segment register
+    mov ss, ax                  ; Set the stack segment register
+    mov sp, 4096                ; Set the stack pointer register
+    
     mov si, msg                 ; Load the address of the message into SI
     call PrintString            ; Print the message
 
