@@ -6,7 +6,7 @@
 [org 0x7C00]                
 
 ; Jump to the start of the bootloader
-jmp Begin
+jmp 0000:Begin                  ; Far jump to the start of the bootloader
 
 Begin:
     mov si, msg                 ; Load the address of the message into SI
