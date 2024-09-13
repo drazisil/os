@@ -1,1 +1,3 @@
 boot.bin
+build/
+!build/.gitkeep
