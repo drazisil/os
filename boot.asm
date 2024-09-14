@@ -14,7 +14,10 @@ Begin:
     ; mov ss, ax                  ; Set the stack segment register
     ; mov sp, 0x7C00              ; Set the stack pointer
     
-    mov si, msg                 ; Load the address of the message into SI
+    call GetSystemInfo          ; Get system information
+    ; We are using Code Page 437
+    
+    mov si, strHello             ; Load the address of the message into SI
     call PrintString            ; Print the message
 
     call PrintCRLF              ; Print a new line
@@ -25,8 +28,6 @@ Begin:
     call PrintCRLF              ; Print a new line
 
 
-    call GetVideoMode     ; Get the current video mode
-    mov [videoMode], al     ; Store the video mode in the videoMode variable
 
     mov si, strVideoMode    ; Load the address of the video mode message into SI
     call PrintString        ; Print the video mode message
@@ -38,6 +39,11 @@ Begin:
     call PrintCRLF          ; Print a new line
 
     jmp $                       ; Infinite loop    
+
+GetSystemInfo:
+    call GetVideoMode           ; Get the current video mode
+    mov [videoMode], al         ; Store the video mode in the videoMode variable
+    ret
 
 PrintCharacter:
     mov ah, 0x0E                ; Function OEh Write Character in TTY Mode
@@ -100,7 +106,7 @@ PrintError:
         
         
 data:
-    msg db 'Hello, World!', 0
+    strHello db 'Hello, World!', 0
 
     strVideoMode db 'Current video mode: ', 0
 
